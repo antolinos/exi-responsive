@@ -42,7 +42,7 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                       <!-- <form role="form"> -->
                             <fieldset>
                                 <div class="form-group">
                                     <input id='name' class="form-control" placeholder="Username" name="name"  autofocus>
@@ -58,7 +58,7 @@
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button id='login'  class="btn btn-lg btn-success btn-block">Login</button>
                             </fieldset>
-                        </form>
+                       <!-- </form> -->
                     </div>
                 </div>
             </div>
@@ -94,10 +94,14 @@
             var url = "http://ispyvalid.esrf.fr:8080/ispyb/ispyb-ws/rest";
         
             function onAuthenticated(sender, data){
-			        alert(data.token);
+                    location.href = 'welcome.html?token=' + data.token;
+    		}
+            function onError(sender, data){
+			        alert("Permission Denied");
     		}
 		    var authenticationDataAdapter = new AuthenticationDataAdapter({
                     onSuccess	: onAuthenticated,
+                    onError	    : onError,
                     async	  	: false,
                     url		    :  url
 	    	});
