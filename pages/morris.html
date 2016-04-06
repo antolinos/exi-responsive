@@ -475,6 +475,49 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+
+    <script src="../js/session.js"></script>
+    <script src="../js/config.js"></script>
+     
+    <script
+			  src="http://momentjs.com/downloads/moment.js"
+			  integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+			  crossorigin="anonymous"></script>
+   
+<script>
+        
+        $( document ).ready(function() {
+            $.urlParam = function(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results==null){
+                return null;
+                }
+                else{
+                return results[1] || 0;
+                }
+            }
+            
+            var token = $.urlParam('token');
+            if (token){
+                var today = moment().format("YYYYMMDD");
+                var sessions = new Session(token);
+                
+                sessions.onSuccess.attach(function(sender, data){
+                   console.log(data); 
+                    
+                });
+                
+                sessions.load(today, today);
+            }
+            else{
+                alert("Error no token");
+            }
+            
+            
+        });
+    </script>
+    
+    
 </body>
 
 </html>

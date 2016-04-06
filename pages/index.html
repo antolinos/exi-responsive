@@ -83,22 +83,23 @@
 			  src="https://code.jquery.com/jquery-2.2.3.min.js"
 			  integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
 			  crossorigin="anonymous"></script>
-    <script src="https://raw.githubusercontent.com/antolinos/ispyb-js-api/master/min/ispyb-js-api.min.js"></script>
-
+    <script src="http://localhost:8082/ispyb-js-api/min/ispyb-js-api.min.js"></script>
+   <script src="../js/config.js"></script>
     <script>
        
 
         $('#login').on('click', function(){
             var login = $('#name').val();
             var password = $('#password').val();
-            var url = "http://ispyvalid.esrf.fr:8080/ispyb/ispyb-ws/rest";
+            var url = Config.url;
         
             function onAuthenticated(sender, data){
-                    location.href = 'welcome.html?token=' + data.token;
+                     location.href = 'welcome.html?token=' + data.token;
     		}
             function onError(sender, data){
 			        alert("Permission Denied");
     		}
+            
 		    var authenticationDataAdapter = new AuthenticationDataAdapter({
                     onSuccess	: onAuthenticated,
                     onError	    : onError,
